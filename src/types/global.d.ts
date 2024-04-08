@@ -19,3 +19,15 @@ export type PageParams = {
   /** 页大小：默认值为 10 */
   pageSize?: number
 }
+/**
+ * 通用商品类型
+ */
+export type GoodsItem = {
+  desc: string
+  discount: string
+  id: string
+  name: string
+  orderNum: number
+  picture: string
+  price: number
+}
