@@ -29,11 +29,18 @@ onLoad(async () => {
   await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHotData()])
 })
 const onRefresherrefresh = async () => {
-  console.log('66666')
   isTriggered.value = true
   guessRef.value?.resetData()
-  await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHotData()])
+  await Promise.all([
+    getHomeBannerData(),
+    getHomeCategoryData(),
+    getHotData(),
+    guessRef.value?.getMore(),
+  ])
   isTriggered.value = false
+}
+const onScrolltolower = () => {
+  guessRef.value?.getMore()
 }
 </script>
 
@@ -43,6 +50,7 @@ const onRefresherrefresh = async () => {
     <scroll-view
       refresher-enabled
       @refresherrefresh="onRefresherrefresh"
+      @scrolltolower="onScrolltolower"
       :refresher-triggered="isTriggered"
       class="scroll-view"
       scroll-y
